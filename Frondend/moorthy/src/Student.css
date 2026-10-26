@@ -1,0 +1,286 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap');
+
+.sd-root {
+  --ink: #12172B;
+  --ink-soft: #1B2140;
+  --paper: #F3EFE6;
+  --paper-dim: #E4DDCD;
+  --card: #FFFFFF;
+  --gold: #E7B23D;
+  --gold-dark: #B9862A;
+  --rust: #E1604B;
+  --text-light: #F3EFE6;
+  --text-muted-light: #A6ADD1;
+  --text-dark: #201B12;
+  --text-muted-dark: #7A7361;
+  --font-serif: 'Fraunces', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  min-height: 100vh;
+  width: 100%;
+  background: var(--paper);
+  font-family: var(--font-sans);
+  color: var(--text-dark);
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.sd-root *, .sd-root *::before, .sd-root *::after {
+  box-sizing: inherit;
+}
+
+@keyframes smoothDrop {
+  0% { opacity: 0; transform: translateY(-15px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes smoothPop {
+  0% { opacity: 0; transform: scale(0.96) translateY(10px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.smooth-enter-top {
+  animation: smoothDrop 0.5s ease-out forwards;
+  will-change: transform, opacity;
+}
+
+.smooth-enter-card {
+  opacity: 0;
+  animation: smoothPop 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+
+.sd-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  background: var(--ink);
+  color: var(--text-light);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.sd-brand { display: flex; align-items: center; gap: 12px; }
+
+.sd-stamp-mark {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.sd-brand-name { font-weight: 600; font-size: 15px; letter-spacing: 0.01em; }
+
+.sd-header-right { display: flex; align-items: center; gap: 14px; }
+.sd-greeting { text-align: right; }
+.sd-greeting-hi { font-size: 13px; color: var(--text-muted-light); margin: 0; }
+.sd-greeting-name { font-family: var(--font-serif); font-size: 18px; font-weight: 600; margin: 2px 0 0; }
+
+.sd-avatar {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: var(--ink-soft);
+  border: 1.5px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 600; font-size: 14px; color: var(--gold);
+  flex-shrink: 0;
+}
+
+.sd-main {
+  padding: 50px;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.sd-hero, .sd-ring-card, .sd-stat-card {
+  background: var(--card);
+  border: 1px solid var(--paper-dim);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sd-hero:hover, .sd-ring-card:hover, .sd-stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+}
+
+.sd-hero {
+  padding: 50px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.sd-date { font-size: 14px; color: var(--text-muted-dark); margin: 0 0 6px; }
+
+/* Explicit color added for hero title */
+.sd-hero-title { 
+  font-family: var(--font-serif); 
+  font-size: 26px; 
+  font-weight: 600; 
+  margin: 0 0 36px; 
+  color: #12172B !important; 
+}
+
+.sd-status-text {
+  margin-top: 15px;
+  font-size: 15px;
+  color: var(--text-muted-dark);
+  min-height: 22px;
+}
+.sd-status-text.sd-status-done {
+  color: var(--gold-dark);
+  font-weight: 600;
+  animation: smoothDrop 0.4s ease forwards;
+}
+
+.sd-week-strip { display: flex; gap: 12px; margin-top: 35px; }
+.sd-week-day { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.sd-week-label { font-size: 12px; font-weight: 600; color: var(--text-dark); }
+
+.sd-week-box {
+  width: 32px; height: 32px; border-radius: 8px;
+  border: 2px solid transparent;
+  transition: transform 0.2s ease;
+}
+.sd-week-day:hover .sd-week-box {
+  transform: scale(1.1);
+}
+
+/* Bulletproof Colors for Week Boxes */
+.sd-week-box.present { background-color: #d4edda; border-color: #28a745; }
+.sd-week-box.absent { background-color: #f8d7da; border-color: #dc3545; }
+.sd-week-box.pending { background-color: #fff3cd; border-color: #ffc107; }
+.sd-week-box.no-session { background-color: #e2e8f0; border-color: #cbd5e1; }
+
+.sd-sidebar { display: flex; flex-direction: column; gap: 24px; }
+
+.sd-ring-card {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.sd-ring-title { font-size: 15px; font-weight: 600; color: var(--text-muted-dark); margin: 0 0 10px; }
+.sd-ring-svg circle.sd-ring-track { fill: none; stroke: var(--paper-dim); stroke-width: 10; }
+.sd-ring-svg circle.sd-ring-value {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 10;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: 60px 60px;
+  transition: stroke-dashoffset 1.2s ease-in-out;
+}
+.sd-ring-num { font-family: var(--font-serif); font-size: 16px; font-weight: 600; fill: var(--text-dark); }
+
+.sd-stats { display: flex; gap: 16px; }
+.sd-stat-card {
+  flex: 1;
+  padding: 24px;
+  border-left: 5px solid #28a745; /* Green for present */
+}
+.sd-stat-card.sd-stat-absent { border-left-color: #dc3545; /* Red for absent */ }
+.sd-stat-num { font-family: var(--font-serif); font-size: 32px; font-weight: 600; line-height: 1; color: #12172B; }
+.sd-stat-label { font-size: 14px; color: var(--text-muted-dark); margin-top: 8px; }
+
+.sd-streak-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #E7B23D, #B9862A);
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 8px 18px;
+  border-radius: 20px;
+  margin: 5px 0 10px;
+  box-shadow: 0 4px 12px rgba(231, 178, 61, 0.3);
+  animation: streakPulse 2s infinite;
+}
+
+@keyframes streakPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.sd-history-card {
+  background: var(--card);
+  border: 1px solid var(--paper-dim);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sd-history-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+}
+
+.sd-history-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-muted-dark);
+  margin: 0 0 16px;
+}
+
+.sd-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 320px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.sd-history-list::-webkit-scrollbar { width: 6px; }
+.sd-history-list::-webkit-scrollbar-thumb { background: #E4DDCD; border-radius: 3px; }
+
+.sd-history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #FAF7F0;
+  transition: background 0.2s ease;
+}
+
+.sd-history-item:hover { background: #F3EFE6; }
+
+.sd-history-left { display: flex; align-items: center; gap: 12px; }
+.sd-history-emoji { font-size: 18px; line-height: 1; }
+.sd-history-info { display: flex; flex-direction: column; }
+
+.sd-history-date { font-size: 13px; font-weight: 600; color: var(--text-dark); }
+.sd-history-time { font-size: 11px; color: var(--text-muted-dark); margin-top: 2px; }
+
+.sd-history-status {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.sd-status-present { background: #D4EDDA; color: #1D6F3A; }
+.sd-status-absent { background: #F8D7DA; color: #A3252D; }
+.sd-status-pending { background: #FFF3CD; color: #856404; }
+
+@media (max-width: 900px) {
+  .sd-main { grid-template-columns: 1fr; padding: 30px 20px; }
+  .sd-header { padding: 20px; justify-content: center; }
+  .sd-hero { padding: 40px 20px; }
+  .sd-history-card { padding: 18px; }
+  .sd-history-item { padding: 8px 10px; }
+  .sd-history-date { font-size: 12px; }
+}
