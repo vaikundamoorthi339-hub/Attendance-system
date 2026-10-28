@@ -25,7 +25,7 @@ export default function Student() {
 
   const handleLogoutClick = async () => {
     try {
-      await fetch('http://localhost:5000/api/logout', {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/logout`, {
         method: 'POST',
         credentials: 'include'
       });
@@ -43,9 +43,9 @@ export default function Student() {
 
   useEffect(() => {
     const fetchStudentStats = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/api/attendance/stats', {
-          method: 'GET',
+      try {        
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/attendance/stats`, {
+        method: 'GET',
           credentials: 'include'
         });
 
@@ -110,7 +110,7 @@ export default function Student() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/attendance/submit', {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/attendance/submit`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ otp: enteredOtp }),
