@@ -18,7 +18,7 @@ export default function TeacherDashboard({ className = 'CSE - AI & ML' }) {
   useEffect(() => {
     const fetchLatestAttendance = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/attendance/latest', {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/attendance/latest`, {
           method: 'GET',
           credentials: 'include'
         });
@@ -73,7 +73,7 @@ export default function TeacherDashboard({ className = 'CSE - AI & ML' }) {
     setIsGenerating(true);
     setMessage('');
     try {
-      const response = await fetch('http://localhost:5000/api/attendance/generate', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/attendance/generate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include'
@@ -108,7 +108,7 @@ export default function TeacherDashboard({ className = 'CSE - AI & ML' }) {
     );
 
     try {
-      const response = await fetch('http://localhost:5000/api/attendance/approve', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/attendance/approve`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ studentId: id }),

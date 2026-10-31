@@ -2,6 +2,12 @@
 
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
+## API configuration
+
+Create a `.env` file in this directory using `.env.example` as a template, then set
+`VITE_API_URL` to the backend server URL (for local development, `http://localhost:5000`).
+Restart the Vite dev server after changing the value.
+
 Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
