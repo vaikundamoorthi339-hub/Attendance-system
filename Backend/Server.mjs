@@ -7,15 +7,12 @@ import { Attendance, User } from './user.mjs';
 import cors from 'cors';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
-import dns from 'dns';
-dns.setServers(['8.8.8.8', '8.8.4.4']); 
 
 dotenv.config();
 
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGO_URI, { family: 4 })
     .then(() => console.log("db connected successfully"))
     .catch((err) => console.log("MongoDB connection error:", err));
-
 const app = express();
 app.use(express.json());
 app.set('trust proxy', 1); 
