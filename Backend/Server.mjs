@@ -7,6 +7,8 @@ import { Attendance, User } from './user.mjs';
 import cors from 'cors';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
+import dns from 'dns';
+dns.setServers(['8.8.8.8', '8.8.4.4']); 
 
 dotenv.config();
 
