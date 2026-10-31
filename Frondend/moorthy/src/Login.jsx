@@ -6,6 +6,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false); // Intha line add panniruken
 
   const navigate = useNavigate();
 
@@ -63,11 +64,20 @@ const Login = () => {
 
             <div className="input-group">
               <input
-                type="password" required
+                type={showPassword ? "text" : "password"} // Intha line maathiruken
+                required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                style={{ paddingRight: '45px' }} // Icon-ku space
               />
               <label>Password</label>
+              {/* Eye Icon inga add panniruken */}
+              <span 
+                className="password-toggle" 
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? '🙈' : '👁️'}
+              </span>
             </div>
 
             <button type="submit" className="submit-btn">Login</button>

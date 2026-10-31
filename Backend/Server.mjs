@@ -227,9 +227,9 @@ app.post("/api/attendance/submit", isAuthenticated, async (req, res) => {
         const COLLEGE_IP = process.env.COLLEGE_IP; 
         const isLocalhost = studentIP === '::1' || studentIP === '127.0.0.1' || studentIP.includes('::ffff:127.0.0.1');
         
-        if (!isLocalhost && !studentIP.includes(COLLEGE_IP)) {
-            return res.status(403).send({ msg: "Access Denied: Please connect to College Wi-Fi to mark attendance." });
-        }
+        // if (!isLocalhost && !studentIP.includes(COLLEGE_IP)) {
+        //     return res.status(403).send({ msg: "Access Denied: Please connect to College Wi-Fi to mark attendance." });
+        // }
 
         const Alreadysubmitted = attendanceRecord.students.find(
             (s) => s.studentId.toString() == req.user._id.toString()
