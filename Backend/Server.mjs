@@ -12,7 +12,6 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-import cors from 'cors';
 app.use(cors({
   origin: 'https://attendance-system-coders-bfb3.vercel.app',
   credentials: true,
