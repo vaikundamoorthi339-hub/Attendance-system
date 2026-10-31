@@ -18,7 +18,7 @@ export default function TeacherDashboard({ className = 'CSE - AI & ML' }) {
   useEffect(() => {
     const fetchLatestAttendance = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/latest`, {
+        const response = await fetch('http://localhost:5000/api/attendance/latest', {
           method: 'GET',
           credentials: 'include'
         });
@@ -73,7 +73,7 @@ export default function TeacherDashboard({ className = 'CSE - AI & ML' }) {
     setIsGenerating(true);
     setMessage('');
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/generate`, {
+      const response = await fetch('http://localhost:5000/api/attendance/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include'
@@ -94,29 +94,39 @@ export default function TeacherDashboard({ className = 'CSE - AI & ML' }) {
   };
 
   const toggleStatus = async (id) => {
+    const previousStatus = students.find((s) => s.id === id)?.status;
+
+    if (previousStatus !== 'pending') return;
+
     setStudents((prev) =>
       prev.map((s) => {
         if (s.id === id) {
-          return { ...s, status: 'present' };
+          return { ...s, status: 'present' }; // Intha line la strict ah present ku maathi
         }
         return s;
       })
     );
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/approve`, {
+      const response = await fetch('http://localhost:5000/api/attendance/approve', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ studentId: id }),
         credentials: 'include'
       });
-      
+
       const data = await response.json();
       if (!response.ok || !data.success) {
-        console.error("Failed to update in DB:", data.msg);
+        setStudents((prev) =>
+          prev.map((s) => (s.id === id ? { ...s, status: previousStatus } : s))
+        );
+        console.error('Failed to update in DB:', data.msg);
       }
     } catch (err) {
-      console.error("API call error:", err);
+      setStudents((prev) =>
+        prev.map((s) => (s.id === id ? { ...s, status: previousStatus } : s))
+      );
+      console.error('API call error:', err);
     }
   };
 

@@ -43,9 +43,9 @@ export default function Student() {
 
   useEffect(() => {
     const fetchStudentStats = async () => {
-      try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/states`, {
-          method: 'GET',
+      try {        
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/attendance/stats`, {
+        method: 'GET',
           credentials: 'include'
         });
 
@@ -110,7 +110,7 @@ export default function Student() {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/submit`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/attendance/submit`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ otp: enteredOtp }),
