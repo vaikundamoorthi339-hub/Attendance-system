@@ -7,7 +7,7 @@ const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('student'); 
-  const [secretKey, setSecretKey] = useState(''); // Secret key state
+  const [secretKey, setSecretKey] = useState(''); 
   
   const navigate = useNavigate(); 
   
@@ -25,7 +25,7 @@ const Signup = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/signup', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ const Signup = () => {
             user_name: email,    
             password: password, 
             role: role,
-            secretKey: secretKey // Backend ku secretKey anuppurom
+            secretKey: secretKey 
         }),
       });
 
