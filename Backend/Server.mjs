@@ -12,25 +12,27 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
+app.set('trust proxy', 1); 
+
 app.use(cors({
-  origin: 'https://attendance-system-coders-bfb3.vercel.app',
+  origin: [
+    'https://attendance-system-coders-bfb3.vercel.app', 
+    'https://attendance-system-b1rybnyxv-coders-bfb3.vercel.app'
+  ], 
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log("db connected"))
-    .catch((err) => console.log("error occured", err));
-
 app.use(session({
     secret: process.env.SESSION_SECRET,
     saveUninitialized: false,
     resave: false,
-    cookie: ({
-        secure: false,
+    cookie: {
+        secure: true, 
+        sameSite: 'none',
         maxAge: 1000 * 60 * 60
-    })
+    }
 }));
 
 app.use(passport.initialize());
